@@ -10,6 +10,9 @@ version '1.0'
 
 mainClassName = 'jasmine.jragon.Main'
 
+sourceCompatibility = 16
+targetCompatibility = 16
+
 compileJava {
     options.encoding("UTF-8")
 }
@@ -42,4 +45,21 @@ test {
 
 jacocoTestReport {
     reports.xml.enabled(true)
+}
+
+jar.manifest.attributes(['Main-Class': "${mainClassName}"])
+
+task fatJar(type: Jar) {
+    manifest.from jar.manifest
+    from {
+        configurations.runtimeClasspath.collect {it.isDirectory() ? it : zipTree(it)}
+    } {
+        exclude "META-INF/*.SF"
+        exclude "META-INF/*.DSA"
+        exclude "META-INF/*.RSA"
+    }
+}
+
+artifacts {
+    archives fatJar
 }
