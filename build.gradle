@@ -26,6 +26,7 @@ repositories {
 }
 
 dependencies {
+    implementation 'org.javatuples:javatuples:1.2'
     implementation group: 'com.mpatric', name: 'mp3agic', version: '0.9.1'
     implementation 'io.github.palexdev:materialfx:11.12.0'
 
