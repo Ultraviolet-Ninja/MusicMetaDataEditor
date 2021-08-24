@@ -1,5 +1,8 @@
 package jasmine.jragon.music;
 
+import com.mpatric.mp3agic.ID3v1;
+import com.mpatric.mp3agic.ID3v1Tag;
+import com.mpatric.mp3agic.ID3v24Tag;
 import com.mpatric.mp3agic.InvalidDataException;
 import com.mpatric.mp3agic.Mp3File;
 import com.mpatric.mp3agic.UnsupportedTagException;
@@ -18,11 +21,15 @@ public class MusicRepository {
     }
 
     public void loadMusic(List<File> fileList) throws IOException, InvalidDataException, UnsupportedTagException {
+        index = 0;
         currentMusicList.clear();
+        addMusic(fileList);
+    }
+
+    public void addMusic(List<File> fileList) throws IOException, InvalidDataException, UnsupportedTagException {
         for (File file : fileList) {
             currentMusicList.add(new Mp3File(file));
         }
-        index = 0;
     }
 
     public boolean isOnFirstSong(){

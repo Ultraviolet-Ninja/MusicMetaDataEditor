@@ -10,8 +10,8 @@ version '1.0'
 
 mainClassName = 'jasmine.jragon.Main'
 
-sourceCompatibility = 16
-targetCompatibility = 16
+sourceCompatibility = 15
+targetCompatibility = 15
 
 compileJava {
     options.encoding("UTF-8")
@@ -28,14 +28,16 @@ repositories {
 dependencies {
     implementation 'org.javatuples:javatuples:1.2'
     implementation group: 'com.mpatric', name: 'mp3agic', version: '0.9.1'
-    implementation 'io.github.palexdev:materialfx:11.12.0'
+    implementation('io.github.palexdev:materialfx:11.12.0') {
+        transitive(true)
+        exclude group: "org.javafx"
+    }
 
     testImplementation group: 'org.testng', name: 'testng', version: '7.4.0'
-    testImplementation 'org.testng:testng:7.4.0'
 }
 
 javafx {
-    version('16')
+    version('15')
     modules = [ 'javafx.controls', 'javafx.fxml', 'javafx.graphics']
 }
 
