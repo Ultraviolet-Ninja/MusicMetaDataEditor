@@ -2,6 +2,7 @@ plugins {
     id 'java'
     id 'jacoco'
     id 'application'
+    id 'org.jetbrains.kotlin.jvm' version '1.6.10'
     id 'org.openjfx.javafxplugin' version '0.0.10'
 }
 
@@ -25,6 +26,10 @@ repositories {
     mavenCentral()
 }
 
+kotlin {
+
+}
+
 dependencies {
     implementation 'org.javatuples:javatuples:1.2'
     implementation group: 'com.mpatric', name: 'mp3agic', version: '0.9.1'
@@ -33,11 +38,11 @@ dependencies {
         exclude group: "org.javafx"
     }
 
-    testImplementation group: 'org.testng', name: 'testng', version: '7.4.0'
+    testImplementation group: 'org.testng', name: 'testng', version: '7.5'
 }
 
 javafx {
-    version('15')
+    version('17')
     modules = [ 'javafx.controls', 'javafx.fxml', 'javafx.graphics']
 }
 
@@ -52,17 +57,17 @@ jacocoTestReport {
 
 jar.manifest.attributes(['Main-Class': "${mainClassName}"])
 
-task fatJar(type: Jar) {
-    manifest.from jar.manifest
-    from {
-        configurations.runtimeClasspath.collect {it.isDirectory() ? it : zipTree(it)}
-    } {
-        exclude "META-INF/*.SF"
-        exclude "META-INF/*.DSA"
-        exclude "META-INF/*.RSA"
-    }
-}
-
-artifacts {
-    archives fatJar
-}
+//task fatJar(type: Jar) {
+//    manifest.from jar.manifest
+//    from {
+//        configurations.runtimeClasspath.collect {it.isDirectory() ? it : zipTree(it)}
+//    } {
+//        exclude "META-INF/*.SF"
+//        exclude "META-INF/*.DSA"
+//        exclude "META-INF/*.RSA"
+//    }
+//}
+//
+//artifacts {
+//    archives fatJar
+//}
